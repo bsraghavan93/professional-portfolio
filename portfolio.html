@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sri Raghavan Balasundaram — Lead Full Stack .NET Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #6ee7b7;
+    --accent2: #818cf8;
+    --accent3: #f59e0b;
+    --text: #e8e8f0;
+    --muted: #6b7280;
+    --card-bg: rgba(26,26,36,0.8);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--muted); font-size: 0.78rem;
+    text-decoration: none; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 10rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(110,231,183,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,231,183,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.08) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -200px; left: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(129,140,248,0.06) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(110,231,183,0.3);
+    padding: 0.3rem 0.9rem; border-radius: 999px; margin-bottom: 2rem;
+    background: rgba(110,231,183,0.05);
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(135deg, #e8e8f0 0%, #6ee7b7 50%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-desc {
+    font-size: 0.9rem; color: #9ca3af;
+    max-width: 640px; line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: #000;
+    padding: 0.8rem 1.8rem; border-radius: 6px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: all 0.2s; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #4ade80; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    padding: 0.8rem 1.8rem; border-radius: 6px; border: 1px solid var(--border);
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.85rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem; padding-top: 3rem;
+    border-top: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .stat-val {
+    font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800;
+    color: var(--accent); line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem; }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; max-width: 1280px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+  .section-sub { color: var(--muted); font-size: 0.88rem; max-width: 560px; line-height: 1.7; margin-bottom: 3.5rem; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-cat {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-cat:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif; font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    font-size: 0.7rem; padding: 0.2rem 0.6rem;
+    background: rgba(129,140,248,0.1); color: #c4b5fd;
+    border-radius: 4px; border: 1px solid rgba(129,140,248,0.2);
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+  .exp-card {
+    margin-left: 2.5rem; margin-bottom: 2.5rem;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2.2rem 2.5rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .exp-card:hover { border-color: rgba(110,231,183,0.4); transform: translateX(6px); }
+  .exp-card::before {
+    content: '';
+    position: absolute; left: -2.9rem; top: 2.2rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .exp-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+  .exp-client {
+    font-family: 'Syne', sans-serif; font-size: 1.25rem;
+    font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+  }
+  .exp-role {
+    font-size: 0.8rem; color: var(--accent); letter-spacing: 0.05em;
+    text-transform: uppercase; margin-top: 0.3rem;
+  }
+  .exp-period {
+    font-size: 0.72rem; color: var(--muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem; border-radius: 999px; white-space: nowrap;
+  }
+  .exp-points { list-style: none; }
+  .exp-points li {
+    font-size: 0.83rem; color: #9ca3af; line-height: 1.7;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; gap: 0.7rem;
+  }
+  .exp-points li:last-child { border-bottom: none; }
+  .exp-points li::before {
+    content: '▸';
+    color: var(--accent); flex-shrink: 0; margin-top: 0.05rem;
+    font-size: 0.7rem;
+  }
+  .exp-tech {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 1.5rem; padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .tech-chip {
+    font-size: 0.68rem; padding: 0.25rem 0.65rem;
+    background: rgba(110,231,183,0.08); color: var(--accent);
+    border-radius: 4px; border: 1px solid rgba(110,231,183,0.2);
+    letter-spacing: 0.04em;
+  }
+
+  /* EDUCATION */
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .edu-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent3); }
+  .edu-degree {
+    font-family: 'Syne', sans-serif; font-size: 1rem;
+    font-weight: 700; margin-bottom: 0.4rem;
+  }
+  .edu-school { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.2rem; }
+  .edu-year { font-size: 0.72rem; color: var(--accent3); letter-spacing: 0.06em; }
+
+  /* CONTACT */
+  .contact-box {
+    background: linear-gradient(135deg, rgba(110,231,183,0.08) 0%, rgba(129,140,248,0.08) 100%);
+    border: 1px solid rgba(110,231,183,0.2);
+    border-radius: 20px; padding: 4rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .contact-box::before {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+  .contact-email {
+    font-family: 'Syne', sans-serif; font-size: 1.5rem;
+    font-weight: 700; color: var(--accent); margin: 1.5rem 0;
+    display: block; text-decoration: none;
+  }
+  .contact-email:hover { text-decoration: underline; }
+  .contact-phone { font-size: 0.88rem; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2.5rem 4rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+  .fade-up:nth-child(2) { animation-delay: 0.1s; }
+  .fade-up:nth-child(3) { animation-delay: 0.2s; }
+  .fade-up:nth-child(4) { animation-delay: 0.3s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 8rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .timeline::before { left: 0; }
+    .exp-card { margin-left: 1.8rem; }
+    .contact-box { padding: 2.5rem 1.5rem; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SRB /</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up">Available for Opportunities</div>
+    <h1 class="hero-name fade-up">Sri Raghavan<br/>Balasundaram</h1>
+    <p class="hero-title fade-up">Lead Full Stack .NET Developer</p>
+    <p class="hero-desc fade-up">
+      Over 11 years crafting high-performance web applications, microservices architectures, and cloud-native solutions. Specializing in .NET ecosystems, Azure/AWS infrastructure, and modern front-end frameworks — from loyalty platforms at United Airlines to claim processing at NJ Treasury.
+    </p>
+    <div class="hero-cta fade-up">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">11+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-val">7</div>
+        <div class="stat-label">Major Clients</div>
+      </div>
+      <div>
+        <div class="stat-val">99.9%</div>
+        <div class="stat-label">API Uptime Target</div>
+      </div>
+      <div>
+        <div class="stat-val">70%</div>
+        <div class="stat-label">Perf. Improvement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2 class="section-title">Technical Arsenal</h2>
+  <p class="section-sub">A decade-plus of mastery across the full stack — from backend APIs to cloud infrastructure, database design, and modern front-end frameworks.</p>
+  <div class="skills-grid">
+    <div class="skill-cat">
+      <div class="skill-cat-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C#</span><span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span><span class="skill-tag">VB.NET</span>
+        <span class="skill-tag">C++</span><span class="skill-tag">R</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React 18</span><span class="skill-tag">Angular 18</span>
+        <span class="skill-tag">Vue.js</span><span class="skill-tag">Next.js</span>
+        <span class="skill-tag">Blazor</span><span class="skill-tag">Redux</span>
+        <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3/SASS</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Backend / APIs</div>
+      <div class="skill-tags">
+        <span class="skill-tag">.NET Core 6</span><span class="skill-tag">ASP.NET MVC</span>
+        <span class="skill-tag">REST APIs</span><span class="skill-tag">GraphQL</span>
+        <span class="skill-tag">Node.js</span><span class="skill-tag">gRPC</span>
+        <span class="skill-tag">WCF</span><span class="skill-tag">SOAP</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Azure</span><span class="skill-tag">AWS</span>
+        <span class="skill-tag">GCP</span><span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span><span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Jenkins</span><span class="skill-tag">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL Server</span><span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Cosmos DB</span><span class="skill-tag">Redis</span>
+        <span class="skill-tag">PostgreSQL</span><span class="skill-tag">BigQuery</span>
+        <span class="skill-tag">T-SQL</span><span class="skill-tag">PL/SQL</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Messaging & Monitoring</div>
+      <div class="skill-tags">
+        <span class="skill-tag">RabbitMQ</span><span class="skill-tag">Kafka</span>
+        <span class="skill-tag">Azure Service Bus</span>
+        <span class="skill-tag">Kibana</span><span class="skill-tag">Dynatrace</span>
+        <span class="skill-tag">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">Architecture</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Microservices</span><span class="skill-tag">MVC</span>
+        <span class="skill-tag">MVVM</span><span class="skill-tag">CQRS</span>
+        <span class="skill-tag">Event-Driven</span><span class="skill-tag">DI</span>
+        <span class="skill-tag">SOLID</span><span class="skill-tag">Serverless</span>
+      </div>
+    </div>
+    <div class="skill-cat">
+      <div class="skill-cat-title">AI & Productivity</div>
+      <div class="skill-tags">
+        <span class="skill-tag">GitHub Copilot</span><span class="skill-tag">Claude Code</span>
+        <span class="skill-tag">Opus LLMs</span><span class="skill-tag">ReadyAPI</span>
+        <span class="skill-tag">Swagger/OpenAPI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="max-width:1280px;margin:0 auto;padding:4rem 4rem;">
+  <div class="section-label">Career Journey</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <p class="section-sub">11+ years delivering enterprise solutions across aviation, finance, government, and tech — always at the intersection of scale and reliability.</p>
+
+  <div class="timeline">
+
+    <!-- United Airlines Loyalty -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">✈ United Airlines — Loyalty & Accrual Redemptions</div>
+          <div class="exp-role">Lead Full Stack .NET Developer</div>
+        </div>
+        <div class="exp-period">Mar 2025 — Present · Chicago, IL</div>
+      </div>
+      <ul class="exp-points">
+        <li>Built RESTful APIs in C# .NET 6 & ASP.NET Core to manage MileagePlus miles, Plus Points, and Chase Cash loyalty currencies for millions of customer accounts.</li>
+        <li>Engineered automated Navigator agent workflows that replaced multi-hour manual upgrade and booking processes with instant one-click operations, eliminating manual steps entirely.</li>
+        <li>Designed MongoDB 4.4 schemas for loyalty profiles and SQL Server 2017 models for transactional data, optimizing queries for 10,000+ high-volume daily transactions.</li>
+        <li>Implemented MileagePlus tier-based point calculation algorithms (Premier Silver/Gold/Platinum/1K) accounting for flight class, distance, and promotional multipliers.</li>
+        <li>Built microservices with .NET Core 6, Docker 20.10, and Kubernetes 1.24 with horizontal pod autoscaling to handle 10,000+ concurrent requests during peak periods.</li>
+        <li>Integrated Chase credit card payment systems with retry mechanisms, circuit breaker patterns, and transaction rollback — maintaining 99.9% transaction success rates.</li>
+        <li>Secured APIs with OAuth 2.0, JWT, and RBAC; enforced PCI DSS compliance with input validation, SQL injection prevention, and end-to-end data encryption.</li>
+        <li>Built React 18 + TypeScript agent dashboards with Redux Toolkit displaying real-time loyalty balances, transaction histories, and redemption options.</li>
+        <li>Implemented Redis 6.2 caching for loyalty data (account balances, program rules), reducing database load and improving API response times by 70%.</li>
+        <li>Designed RabbitMQ 3.11 message queues for async post-flight loyalty accruals with dead-letter queues and retry policies processing millions of point events reliably.</li>
+        <li>Configured Kibana 8.2 and Dynatrace APM across microservices, building alerting dashboards that reduced MTTR by 60%.</li>
+        <li>Built Azure DevOps CI/CD pipelines with blue-green deployments, cutting release time from 4 hours to 15 minutes with zero downtime.</li>
+        <li>Leveraged GitHub Copilot and Claude Code AI tools to accelerate Angular/React component delivery, API documentation, and complex debugging across sprints.</li>
+        <li>Delivered 40–50 story points per 2-week Agile sprint while mentoring junior developers on code quality, test coverage (85%), and OpenAPI contract design.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">.NET 6</span><span class="tech-chip">C#</span><span class="tech-chip">React 18</span>
+        <span class="tech-chip">TypeScript</span><span class="tech-chip">MongoDB</span><span class="tech-chip">SQL Server</span>
+        <span class="tech-chip">Redis</span><span class="tech-chip">RabbitMQ</span><span class="tech-chip">Kubernetes</span>
+        <span class="tech-chip">Docker</span><span class="tech-chip">Azure DevOps</span><span class="tech-chip">Kibana</span>
+        <span class="tech-chip">OAuth 2.0</span><span class="tech-chip">PCI DSS</span>
+      </div>
+    </div>
+
+    <!-- NJ Treasury -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">🏛 New Jersey Treasury (State of NJ)</div>
+          <div class="exp-role">Lead Full Stack .NET Developer / Application Developer</div>
+        </div>
+        <div class="exp-period">May 2024 — Mar 2025</div>
+      </div>
+      <ul class="exp-points">
+        <li>Led modernization of legacy claim processing systems to .NET Core/Framework with MVC architecture for enhanced scalability, security, and maintainability.</li>
+        <li>Developed full-stack interfaces using Angular 13 (with Angular Material), React, Vue.js, and Blazor WebAssembly integrated with .NET Core APIs for responsive UIs.</li>
+        <li>Integrated Blazor WebAssembly with .NET Core APIs to improve client-side rendering performance and reduce server load significantly.</li>
+        <li>Created SSIS, SSRS, Azure Data Factory, and Azure Synapse pipelines for data migration, transformation, and enterprise reporting using SQL Pool and Spark Pool.</li>
+        <li>Developed and maintained OnBase integrations (Unity API, Workflow Studio, ODBC) to automate document approval and indexing workflows across claim operations.</li>
+        <li>Built Python-based and C# serverless Azure Function Apps to automate batch processing of claim documents, optimizing job scalability and reducing manual workloads.</li>
+        <li>Designed Power BI dashboards and reports connecting SQL Server and Azure Synapse for actionable operational insights and data visualization.</li>
+        <li>Implemented OAuth2, JWT, and API Gateway security with Microsoft Graph API and GraphQL for secure and compliant data integration across state systems.</li>
+        <li>Configured and maintained Jenkins + Azure DevOps CI/CD pipelines with GitHub integration, significantly reducing deployment time and manual intervention.</li>
+        <li>Leveraged GCP BigQuery, Dataflow, and Pub/Sub for real-time and batch data processing pipelines alongside Cloud Build for efficient application delivery.</li>
+        <li>Wrote TypeScript-based type-safe codebases with SASS/Bootstrap for cross-browser compatible, responsive web pages meeting modern accessibility standards.</li>
+        <li>Developed PowerShell automation scripts for system monitoring, software installations, network configurations, and performance reporting.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">.NET Core</span><span class="tech-chip">Angular 13</span><span class="tech-chip">Blazor</span>
+        <span class="tech-chip">React</span><span class="tech-chip">Azure Synapse</span><span class="tech-chip">Power BI</span>
+        <span class="tech-chip">OnBase</span><span class="tech-chip">Python</span><span class="tech-chip">Jenkins</span>
+        <span class="tech-chip">GCP</span><span class="tech-chip">SSIS/SSRS</span><span class="tech-chip">GraphQL</span>
+      </div>
+    </div>
+
+    <!-- United Airlines Inflight -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">✈ United Airlines — Inflight Records</div>
+          <div class="exp-role">Lead Full Stack .NET Developer</div>
+        </div>
+        <div class="exp-period">Feb 2022 — Apr 2024 · Chicago, IL</div>
+      </div>
+      <ul class="exp-points">
+        <li>Spearheaded design and development of Web API projects for the Inflight Records system using C#, .NET 6, and Entity Framework, optimizing performance and scalability.</li>
+        <li>Engineered multi-tier architecture with VB.NET and .NET Core, integrating state management via Redux and Context API to stabilize complex UI application state.</li>
+        <li>Built reusable Angular 14 standalone components and implemented React performance optimizations (lazy loading, memoization, virtualized lists) for enhanced responsiveness.</li>
+        <li>Managed mission-critical Windows Services for uninterrupted data processing and optimized SQL queries, indexing, and Redis/Azure Cache to enhance performance.</li>
+        <li>Led migration to Git and Azure DevOps and utilized ReadyAPI for comprehensive REST/SOAP API test suites, ensuring robust deployment quality across environments.</li>
+        <li>Developed dynamic Blazor/MAUI applications with Razor syntax for responsive UI elements and integrated RESTful APIs with Vue.js for real-time data interactions.</li>
+        <li>Enhanced web application performance using Next.js, reducing load times by over 30% through dynamic routing and static regeneration.</li>
+        <li>Created interactive Power BI dashboards integrating SQL Server and Azure Synapse data, with complex DAX expressions for accurate real-time analytics.</li>
+        <li>Built and managed AWS-based CI/CD pipelines and automated cloud infrastructure provisioning for high-availability deployments.</li>
+        <li>Configured AWS IAM roles and policies for secure resource access and fine-grained permission control across application environments.</li>
+        <li>Collaborated on TeamSite content workflow optimizations, accelerating content delivery timelines by 30% across platform channels.</li>
+        <li>Conducted incident management, root cause analysis, and batch job optimization using SQL/PL/SQL and stored procedures at enterprise data scale.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">C# .NET 6</span><span class="tech-chip">Angular 14</span><span class="tech-chip">React</span>
+        <span class="tech-chip">Next.js</span><span class="tech-chip">Blazor</span><span class="tech-chip">Vue.js</span>
+        <span class="tech-chip">Redis</span><span class="tech-chip">Power BI</span><span class="tech-chip">AWS</span>
+        <span class="tech-chip">ReadyAPI</span><span class="tech-chip">Azure DevOps</span><span class="tech-chip">TypeScript</span>
+      </div>
+    </div>
+
+    <!-- Rocket Mortgage -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">🏠 Quicken Loans / Rocket Mortgage</div>
+          <div class="exp-role">Full Stack .NET Developer</div>
+        </div>
+        <div class="exp-period">May 2021 — Feb 2022 · Detroit, MI</div>
+      </div>
+      <ul class="exp-points">
+        <li>Led backend development of web APIs using C#, .NET Core, and Azure with Entity Framework, delivering scalable loan processing services under tight Agile timelines.</li>
+        <li>Built Next.js applications with server-side rendering, contributing to a 50% increase in page views through improved performance and SEO rankings.</li>
+        <li>Designed a Blazor-based loan application tracking module, improving user engagement and loan processing efficiency significantly.</li>
+        <li>Developed RESTful microservices using .NET Core, Node.js, and Kotlin with Spring Boot for secure, scalable, and cloud-integrated transactions.</li>
+        <li>Designed real-time analytics with Azure Synapse, Event Hub, and Stream Analytics alongside complex PL/SQL for enhanced data processing.</li>
+        <li>Standardized web templates in TeamSite, achieving consistent branding and a 25% increase in user engagement across digital platforms.</li>
+        <li>Automated workflows using C# services and serverless AWS Lambda, API Gateway, and DynamoDB for cost-efficient cloud solutions.</li>
+        <li>Integrated OnBase REST/SOAP Web Services with enterprise applications for real-time document retrieval and metadata updates.</li>
+        <li>Built CI/CD pipelines via Azure DevOps and GitHub Actions for automated Azure Function App deployments with Docker and Jenkins.</li>
+        <li>Optimized AWS CloudWatch monitoring and conducted cost analysis via AWS Cost Explorer to reduce cloud expenditures through reserved instances.</li>
+        <li>Created responsive Angular 7 and React JS front-end applications with advanced UI features (filtering, sorting, pagination) integrated with backend services.</li>
+        <li>Designed batch jobs with SQL, PL/SQL, and stored procedures for large-scale enterprise data processing, reducing execution time substantially.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">.NET Core</span><span class="tech-chip">C#</span><span class="tech-chip">Next.js</span>
+        <span class="tech-chip">Blazor</span><span class="tech-chip">Angular 7</span><span class="tech-chip">React JS</span>
+        <span class="tech-chip">AWS Lambda</span><span class="tech-chip">Azure Synapse</span><span class="tech-chip">Kotlin</span>
+        <span class="tech-chip">Docker</span><span class="tech-chip">Jenkins</span><span class="tech-chip">OnBase</span>
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">💼 LinkedIn</div>
+          <div class="exp-role">Full Stack .NET Developer</div>
+        </div>
+        <div class="exp-period">Mar 2018 — May 2021 · San Francisco, CA</div>
+      </div>
+      <ul class="exp-points">
+        <li>Engineered user-centric payment gateways integrating legacy data with modern React JS, Angular.JS, and .NET Core, improving platform transaction reliability.</li>
+        <li>Built and deployed Node.js microservices with server-side rendering to improve SEO and reduce load times for JavaScript-heavy applications.</li>
+        <li>Designed a versatile multi-platform C++ framework for complex data structures and multithreading, significantly boosting application performance and scalability.</li>
+        <li>Developed dynamic Blazor UI with real-time data binding using SignalR for instant updates, integrated with Azure Function Apps for background task automation.</li>
+        <li>Built Kotlin + Spring Boot backend services with JPA/Hibernate for high-performance database integration and transactional integrity.</li>
+        <li>Leveraged R and Python for advanced data analysis alongside SQL expertise to drive data-driven decisions and optimize complex database interactions.</li>
+        <li>Provisioned and managed AWS EC2, Auto Scaling Groups, and Elastic Load Balancers for high availability and performance optimization.</li>
+        <li>Optimized GCP Compute Engine, App Engine, and Cloud Functions with VPC security, Cloud IAM, Cloud Load Balancing, and Cloud Armor for secure infrastructure.</li>
+        <li>Pioneered Azure DevOps CI/CD pipeline automation, streamlining the deployment process and enhancing software delivery efficiency across the organization.</li>
+        <li>Championed MVC architecture, dependency injection, and Entity Framework patterns while leading version control and code review practices with Git and TFS.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">.NET Core</span><span class="tech-chip">C#</span><span class="tech-chip">React JS</span>
+        <span class="tech-chip">Angular JS</span><span class="tech-chip">Node.js</span><span class="tech-chip">Blazor</span>
+        <span class="tech-chip">Kotlin</span><span class="tech-chip">C++</span><span class="tech-chip">AWS</span>
+        <span class="tech-chip">GCP</span><span class="tech-chip">SignalR</span><span class="tech-chip">Azure DevOps</span>
+      </div>
+    </div>
+
+    <!-- Wells Fargo -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-client">🏦 Wells Fargo</div>
+          <div class="exp-role">.NET Developer → Intern</div>
+        </div>
+        <div class="exp-period">Aug 2016 — Mar 2018 · Phoenix, AZ</div>
+      </div>
+      <ul class="exp-points">
+        <li>Led design, development, and deployment of web applications and RESTful services using .NET Core and Entity Framework for banking operations.</li>
+        <li>Developed advanced React JS user interfaces with animations and complex form functionalities, enhancing digital banking user experience.</li>
+        <li>Implemented Kafka for event streaming, enhancing workflow efficiency and real-time data processing capabilities across banking services.</li>
+        <li>Executed Azure migrations optimizing application performance with Cosmos DB and SQL services; used ARM templates for infrastructure-as-code.</li>
+        <li>Built CI/CD pipelines with Azure DevOps and automated GCP deployments using Terraform and Google Deployment Manager for IaC.</li>
+        <li>Implemented essential Node.js security measures — input validation, JWT authentication, and Helmet middleware for secure APIs.</li>
+        <li>Monitored system performance using GCP Cloud Monitoring, Cloud Logging, and Error Reporting for operational visibility.</li>
+        <li>Conducted end-to-end API performance and load testing with ReadyAPI integrated into CI/CD workflows for robustness validation.</li>
+        <li>Enhanced database architecture with advanced T-SQL scripts and SSIS packages, optimizing data management and processing efficiency.</li>
+        <li>Designed and implemented APIs for system integration to streamline banking operations and enhance interoperability across services.</li>
+        <li>Collaborated with clients to capture requirements and tailor analytics-focused API solutions, applying Agile methodologies in daily standups.</li>
+      </ul>
+      <div class="exp-tech">
+        <span class="tech-chip">.NET Core</span><span class="tech-chip">React JS</span><span class="tech-chip">Angular 2/4</span>
+        <span class="tech-chip">Kafka</span><span class="tech-chip">Cosmos DB</span><span class="tech-chip">Azure</span>
+        <span class="tech-chip">Node.js</span><span class="tech-chip">GCP Terraform</span><span class="tech-chip">SSIS</span>
+        <span class="tech-chip">ReadyAPI</span><span class="tech-chip">JWT</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <p class="section-sub">Formal training in Computer Science and Technology Management, underpinning a decade of enterprise software engineering.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Master's — Information Technology Management</div>
+      <div class="edu-school">Golden Gate University, California</div>
+      <div class="edu-year">2017</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor's — Computer Science & Engineering</div>
+      <div class="edu-school">Anna University, Tamil Nadu, India</div>
+      <div class="edu-year">2015</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <div class="contact-box">
+    <p style="color:var(--muted);font-size:0.88rem;max-width:500px;margin:0 auto;">
+      Open to new opportunities, collaborations, and challenging projects. Whether it's a full-stack build, cloud migration, or architecture consultation — let's talk.
+    </p>
+    <a href="mailto:raghavbala35@gmail.com" class="contact-email">raghavbala35@gmail.com</a>
+    <div class="contact-phone">📞 +1 (313) 327-2802</div>
+    <div style="margin-top:2rem;">
+      <a href="mailto:raghavbala35@gmail.com" class="btn-primary">Send an Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Designed & Built for Sri Raghavan Balasundaram · Lead Full Stack .NET Developer</div>
+  <div style="margin-top:0.4rem;opacity:0.5;">© 2025 · Philadelphia Metro Area</div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.exp-card, .skill-cat, .edu-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
